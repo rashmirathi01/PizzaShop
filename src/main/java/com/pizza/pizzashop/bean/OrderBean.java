@@ -10,6 +10,7 @@ public class OrderBean {
 	private String pizzaName;
 	private User user;
 	private Timestamp orderDate;
+	private int orderId;
 
 	public OrderBean() {
 
@@ -45,5 +46,14 @@ public class OrderBean {
 	public void setOrderDate(Timestamp orderDate) {
 		this.orderDate = orderDate;
 	}
+	
+	public int getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
+
 
 }

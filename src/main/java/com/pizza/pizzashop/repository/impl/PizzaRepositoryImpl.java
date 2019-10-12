@@ -13,13 +13,9 @@ import com.pizza.pizzashop.repository.PizzaRepository;
 @Repository
 // @Service
 public class PizzaRepositoryImpl implements PizzaRepository {
+	private List pizzaList;
 
-	@Autowired
-	PizzaRepository pizzaRepository;
-	
-	private static List pizzaList;
-
-	static {
+	public void init() {
 		if (pizzaList == null) {
 			pizzaList = new ArrayList<PizzaBean>();
 			List ingredients = Arrays.asList("onion, tomato");
@@ -39,6 +35,7 @@ public class PizzaRepositoryImpl implements PizzaRepository {
 
 	@Override
 	public List<PizzaBean> getAll() {
+		init();
 		return pizzaList;
 	}
 

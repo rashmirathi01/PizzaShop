@@ -18,31 +18,22 @@ import com.pizza.pizzashop.repository.PizzaRepository;
 // @Service
 public class OrderRepositoryImpl implements OrderRepository {
 
-	@Autowired
-	PizzaRepository pizzaRepository;
-
 	private static Map<User, List<OrderBean>> orders;
-	private static Integer nextOrderId;
-
-	static {
-		if (orders == null) {
-			orders = new HashMap<User, List<OrderBean>>();
-			nextOrderId = 0;
-		}
-
-	}
+	private static Integer orderId = 0 ;
 
 	@Override
 	public List postOrder(OrderBean order) {
-		int orderId = nextOrderId + 1;
-		order.setOrderDate(new Timestamp(System.currentTimeMillis()));
+		if (orders == null) {
+			orders = new HashMap<User, List<OrderBean>>();
+		}
 		List<OrderBean> orderList = orders.get(order.getUser());
+		order.setOrderDate(new Timestamp(System.currentTimeMillis()));
+		order.setOrderId(++orderId);
 		if (orderList == null) {
 			orderList = new ArrayList<OrderBean>();
 		}
 		orderList.add(order);
 		orders.put(order.getUser(), orderList);
-		nextOrderId = orderId;
 		return orderList;
 	}
 
